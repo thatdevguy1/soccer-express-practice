@@ -9,7 +9,7 @@
     <h1>Teams</h1>
     <% teams.forEach(team => { %>
         <div>
-            <h4><%= team.name %></h4>
+            <h4 style="background-color: <%= team.color %>"><%= team.id %> -- <%= team.name %></h4> 
         </div>    
     <% }) %>    
 </body>

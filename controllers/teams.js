@@ -7,6 +7,19 @@ function index(req, res, next) {
     res.render('teams/index.ejs', context);
   }
 
+function newTeam(req, res){
+  res.render('teams/newTeam.ejs')
+}
+
+function create(req, res){
+  //Create the team in our "Database"
+  teamsDb.addTeam(req.body)
+  //redirect to the index
+  res.redirect('/teams')
+}
+
 module.exports = {
-    index
+    index, 
+    new: newTeam,
+    create
 }

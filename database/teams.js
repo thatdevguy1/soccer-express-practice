@@ -1,6 +1,8 @@
+const { v4: uuidv4 } = require("uuid")
+
 const teams = [
-    {id: "1", name: "Manchester United", color: ""},
-    {id: "2", name: "Chelsea", color: ""},
+    {id: "1", name: "Manchester United", color: "red"},
+    {id: "2", name: "Chelsea", color: "blue"},
     {id: "3", name: "Hotspurs", color: ""},
     {id: "4", name: "New Castle", color: ""},
     {id: "5", name: "AFC Richmond", color: ""},
@@ -22,8 +24,15 @@ function getOneByName(name){
     return foundTeam;
 }
 
+// team -> {name: 'Liverpool', color: 'Red'}
+function addTeam(team){
+    team.id = uuidv4()
+    teams.push(team)
+}
+
 module.exports = {
     getAll,
     getOneById,
-    getOneByName
+    getOneByName,
+    addTeam
 }
