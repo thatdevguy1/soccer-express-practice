@@ -1,25 +1,41 @@
-const teamsDb = require("../database/teams");
+const Team = require("../models/team");
 
-function index(req, res, next) {
+async function index(req, res, next) {
+
+  const allTeams = await Team.find();
+
+    // Team.find({}, function(err, allTeams){
+
+    // })
+
     const context = {
-      teams: teamsDb.getAll()
+      teams: allTeams
     }
+
     res.render('teams/index.ejs', context);
+
   }
 
 function newTeam(req, res){
   res.render('teams/newTeam.ejs')
 }
 
-function create(req, res){
+//req.body = {name: "the name", color: "the color"}
+async function create(req, res){
   //Create the team in our "Database"
-  teamsDb.addTeam(req.body)
+  await Team.create(req.body)
   //redirect to the index
   res.redirect('/teams')
+}
+
+async function show(req, res){
+  const team = await Team.findById(req.params.id)
+  res.render("teams/show.ejs", {team})
 }
 
 module.exports = {
     index, 
     new: newTeam,
-    create
+    create,
+    show
 }
